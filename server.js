@@ -13,3 +13,18 @@ app.listen(5002, () => {
     console.log("Connection was successfull");
 });
 
+app.get("/", (req,res) => {
+    res.send("Fred is here");
+});
+
+app.get("/welcome", (req,res)=>{
+    res.send("Welcome to my API");
+});
+
+app.get("/test", (req,res) => {
+    res.send("This is a test route");
+});
+
+app.get("/date", (req,res) => {
+    res.send(`Today's date is ${new Date().toDateString()}`);
+})
