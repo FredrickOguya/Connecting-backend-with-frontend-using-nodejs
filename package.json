@@ -16,5 +16,10 @@
   "bugs": {
     "url": "https://github.com/FredrickOguya/Connecting-backend-with-frontend-using-nodejs/issues"
   },
-  "homepage": "https://github.com/FredrickOguya/Connecting-backend-with-frontend-using-nodejs#readme"
+  "homepage": "https://github.com/FredrickOguya/Connecting-backend-with-frontend-using-nodejs#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0"
+  }
 }
