@@ -14,7 +14,7 @@ const logger = (req,res, next) => {
 }
 
 const checkTime = (req,res,next) =>{
-    const hour = 20;
+    const hour = new Date().getHours();
 
     if (hour>=6 && hour<= 18){
         next(); //continue to the next function
@@ -22,6 +22,14 @@ const checkTime = (req,res,next) =>{
         res.send("Access denied. This API is available between 6 AM - 6 PM only. ");
     }
 };
+let requestNumber = 0;
+
+const requestCounter = (req,res,next) =>{
+    requestNumber+=1;
+    console.log(`Request ${requestNumber}`)
+    next();
+}
+app.use(requestCounter)
 
 app.use(logger)
 //start a server on port 5002
