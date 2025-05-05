@@ -8,6 +8,11 @@ const app = express(); //Initialize an express application
 app.use(express.json()); //Enable JSON data processing
 app.use(cors()); // Enable cross-origin requests
 
+const logger = (req,res, next) => {
+    console.log(`${req.method} request to ${req.url}`);
+    next();//move to the next middleware or route handler
+}
+app.use(logger)
 //start a server on port 5002
 app.listen(5002, () => {
     console.log("Connection was successfull");
