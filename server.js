@@ -4,7 +4,7 @@ const express = require("express"); //Import Express framework
 const cors = require("cors") //Import CORS middleware
 
 const app = express(); //Initialize an express application
-
+78
 app.use(express.json()); //Enable JSON data processing
 app.use(cors()); // Enable cross-origin requests
 
@@ -27,4 +27,12 @@ app.get("/test", (req,res) => {
 
 app.get("/date", (req,res) => {
     res.send(`Today's date is ${new Date().toDateString()}`);
+});
+
+app.get("/test", (req,res)=>{
+    res.send("This is a test route")
+});
+
+app.get("/date", (req,res)=>{
+    res.send(`Todays date is ${new Date().toDateString()}`)
 })
