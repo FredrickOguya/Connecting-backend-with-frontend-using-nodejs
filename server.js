@@ -22,6 +22,26 @@ const checkTime = (req,res,next) =>{
         res.send("Access denied. This API is available between 6 AM - 6 PM only. ");
     }
 };
+let users = [];
+
+app.post("/users",(req,res) => {
+    const user = req.body;
+
+    //check if name and email are provided
+    if (!user.name || !user.email) {
+        return res.status(400).send("Error: Name and email are required");
+    }
+
+    //Simple email format validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if(!emailRegex.test(user.email)){
+        return res.status(400).send("Error: Invalid email format");
+    }
+
+    users.push(user);
+    res.send("User added successfully!");
+});
 let requestNumber = 0;
 
 const requestCounter = (req,res,next) =>{
@@ -32,6 +52,8 @@ const requestCounter = (req,res,next) =>{
 app.use(requestCounter)
 
 app.use(logger)
+
+
 //start a server on port 5002
 app.listen(5002, () => {
     console.log("Connection was successfull");
@@ -53,10 +75,6 @@ app.get("/date",checkTime, (req,res) => {
     res.send(`Today's date is ${new Date().toDateString()}`);
 });
 
-app.get("/test", (req,res)=>{
-    res.send("This is a test route")
-});
-
-app.get("/date", (req,res)=>{
-    res.send(`Todays date is ${new Date().toDateString()}`)
+app.get("/users", (req,res)=>{
+    res.json(users)
 })
