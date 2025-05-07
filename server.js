@@ -115,3 +115,5 @@ app.delete("/users/:index", (req,res) => {
 
     res.send("User deleted successfully!");
 });
+
+// creating and connectinf to mysql
