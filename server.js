@@ -89,3 +89,29 @@ app.get("/users/:index", (req, res)=>{
     res.json(users[index]);//Return user at the given index
 });
 
+
+app.put("/users/:index", (req,res) => {
+    const index = parseInt(req.params.index,10);
+    //Extract index
+    const updateUser = req.body;
+    //get new user data
+
+    if(isNaN(index) || index >= users.length || index < 0) {
+        return res.status(404).send("Error: User not found");
+    }
+
+    users[index] = updateUser; // Update user data
+
+    res.send("User updated successfully!");
+});
+
+app.delete("/users/:index", (req,res) => {
+    const index = parseInt(req.params.index,10)
+    if(isNaN(index) || index >= users.length || index < 0) {
+        return res.status(404).send("Error: User not found");
+    }
+
+    users.splice(index,1); //remove user from array
+
+    res.send("User deleted successfully!");
+});
