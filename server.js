@@ -78,3 +78,14 @@ app.get("/date",checkTime, (req,res) => {
 app.get("/users", (req,res)=>{
     res.json(users)
 })
+
+app.get("/users/:index", (req, res)=>{
+    const index = parseInt(req.params.index,10);//Convert to integer
+
+    if(isNaN(index) || index<0 || index >= users.length){
+        return res.status(404).send("Error: User not found");
+    }
+
+    res.json(users[index]);//Return user at the given index
+});
+
