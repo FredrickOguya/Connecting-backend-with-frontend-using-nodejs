@@ -1,12 +1,16 @@
-const express = require('express');
-const app = express();
-const PORT = 5000;
+const mysql = require('mysql2');
 
-app.use(express(express.json())); // allows Express to parse JSON bodies
+const db = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: 'QsxfThm,1',
+    database: 'SIGNUP'
+});
 
-// Route to handle data submission (POST request)
-app.post('/submit', (req,res)=> {
-    const receivedData = req.body;
-    console.log('Data received:', receivedData);
-    res.json({message: 'Data received successfully'})
+db.connect((err)=>{
+    if(err){
+       console.error('Error connecting to MySQL:' ,err);
+        return; 
+    }
+    console.log('Connected to MySQL');
 });
