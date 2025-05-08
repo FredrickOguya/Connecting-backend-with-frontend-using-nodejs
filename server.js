@@ -14,3 +14,15 @@ db.connect((err)=>{
     }
     console.log('Connected to MySQL');
 });
+
+app.post('/submit', (req,res)=>{
+    const {name,age} = req.body;
+    const query = 'INSERT INTO users (name, age) VALUES (?, ?)';
+
+    db.query(query, [name,age], (err,result) => {
+        if(err){
+            return res.status(500).json({err: 'Failed to insert data'});
+        }
+        res.json({message: 'User saved successfully!'});
+    });
+});
