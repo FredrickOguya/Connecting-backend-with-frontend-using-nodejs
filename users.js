@@ -15,3 +15,9 @@ router.get('/:id', async (req,res) => {
     const [rows] = await db.query('SELECT * FROM users WHERE id = ?', [req.params.id]);
     res.json(rows[0]);
 });
+
+// Post create user
+router.get('/:id' , async (req, res) => {
+    const [rows] = await db.query('SELECT * FROM users WHERE id= ?', [req.params.id]);
+    res.json(rows[0]);
+});
