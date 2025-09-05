@@ -1,5 +1,11 @@
-const mysql = require('mysql2');
+const express = require('express');
 
+const app = express()
+const PORT = 5000;
+
+app.use(express.json())
+
+const mysql = require('mysql2');
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
@@ -19,6 +25,7 @@ app.post('/submit', (req,res)=>{
     const {name,age} = req.body;
     const query = 'INSERT INTO users (name, age) VALUES (?, ?)';
 
+    
     db.query(query, [name,age], (err,result) => {
         if(err){
             return res.status(500).json({err: 'Failed to insert data'});
@@ -26,3 +33,14 @@ app.post('/submit', (req,res)=>{
         res.json({message: 'User saved successfully!'});
     });
 });
+
+//retrieving data
+
+app.get('/data', (req,res)=>{
+    db.query('SELECT * FROM users',(err,results)=>{
+        if(err) {
+            return res.status(500).json({error: 'Failed to fetch users'})
+        }
+        res.json(results)
+    })
+})
